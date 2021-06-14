@@ -20,8 +20,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/go-macaron/inject"
 	. "github.com/smartystreets/goconvey/convey"
+	"go.wandrs.dev/inject"
 )
 
 type SpecialString interface {
