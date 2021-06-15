@@ -31,6 +31,7 @@ type Injector interface {
 	// dependency in its Type map it will check its parent before returning an
 	// error.
 	SetParent(Injector)
+	Reset()
 }
 
 // Applicator represents an interface for mapping dependencies to a struct.
@@ -259,4 +260,13 @@ func (i *injector) GetVal(t reflect.Type) reflect.Value {
 
 func (i *injector) SetParent(parent Injector) {
 	i.parent = parent
+}
+
+func (i *injector) Reset() {
+	for k := range i.values {
+		delete(i.values, k)
+	}
+	if i.parent != nil {
+		i.parent.Reset()
+	}
 }
